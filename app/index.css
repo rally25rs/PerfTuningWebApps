@@ -21,6 +21,10 @@ body.horizontal {
 #big-list li {
     height: 81px;
     border-bottom: 1px solid #777;
+    background-image: url("i/bone.png");
+    background-repeat: no-repeat;
+    background-size: auto 80px;
+    background-position: center right;
 }
 
 .label {
