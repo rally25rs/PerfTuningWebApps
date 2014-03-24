@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="switch.css" />
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="switch.js"></script>
+</head>
+
+<body>
+    <header><h1>Doggies!</h1></header>
+    <ul id="big-list"></ul>
+    <button id="generate" type="button">Find some</button>
+</body>
+
+<script type="text/javascript">
+    function makeBigList() {
+        var $bigList = $("#big-list");
+        var listItems = [];
+
+        for(var i = 0; i < 150; i++) {
+            listItems.push(makeListItem(i));
+        }
+
+        $bigList.append(listItems);
+    }
+
+    function makeListItem(index) {
+        var imgNum = (index % 20) + 1;
+        var checked = (index % 4 == 0);
+        return $('<li><img src="i/' + imgNum + '.jpg" /><span class="label">Adopt Me?</span><input type="checkbox" class="switch" ' + (checked ? 'checked="true"' : '') + '/></li>');
+    }
+
+    function makeSwitch(targetElement) {
+        new Switch($(targetElement));
+    }
+
+    function checkOrientation() {
+        var w = window,
+            d = document,
+            e = d.documentElement,
+            b = d.getElementsByTagName('body')[0],
+            width = w.innerWidth || e.clientWidth || b.clientWidth,
+            height = w.innerHeight|| e.clientHeight|| b.clientHeight;
+
+        if(width > height) {
+            b.className = "horizontal";
+        } else {
+            b.className = "vertical";
+        }
+    }
+
+    $(window).on("resize", checkOrientation);
+    checkOrientation();
+
+    $("#generate").on("click", function () {
+        $("ul").empty();
+        makeBigList();
+        $(".switch").each(function () {
+            makeSwitch(this);
+        });
+    });
+</script>
+</html>
